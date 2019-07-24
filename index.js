@@ -17,7 +17,8 @@ const authenticationRoutes = require("./routes/authentication"),
 
 //MongoDB setup
 const dbUrl = `mongodb+srv://admin:${db_pass}@cluster0-me3oo.mongodb.net/test?retryWrites=true&w=majority`;
-mongoose.connect("mongodb+srv://admin:admin007@cluster0-me3oo.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true }).then(()=>{
+console.log(dbUrl)
+mongoose.connect(dbUrl, { useNewUrlParser: true }).then(()=>{
     console.log("DB connected");
 }).catch(err =>{
     console.log("DB ERROR", err.message);
