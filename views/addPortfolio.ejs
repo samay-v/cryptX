@@ -1,0 +1,13 @@
+<h1>add portfolio</h1>
+
+<form action="/portfolio" method="post">
+    <input type="text" name="portfolio[name]" placeholder="Enter name of the portfolio" required>
+    <input type="hidden" name = "portfolio[creatorName]" value="<%=currentUser.username%>">
+    <input type="text" name="portfolio[target]" placeholder="Enter portfolio Target" required>
+
+    <%investments.forEach(investment => {%>
+        <label for="investment[<%=investment.id%>]"><%=investment.name%></label>
+        <input type="number" name="investment[<%=investment.id%>]" placeholder="enter percentage of investment" min="0" max="100">
+    <%})%>
+    <button type="submit">Make portfolio</button>
+</form>

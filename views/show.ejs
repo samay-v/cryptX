@@ -1,0 +1,60 @@
+<a href="/">Go home</a>
+
+<%if(currentUser){%>
+        <a href="/logout">Log out</a>
+<%} else{%>
+        <a href="/login">login</a>
+        <a href="/register">Signup</a>
+<%} %>
+
+<%if(currentUser){%>
+        <h1>Welcome <%=currentUser.username%></h1>
+        <p>Current balace: <%=currentUser.balance%> </p>
+
+        <%if(currentUser.isTrader){%>
+                <a href="/portfolio/new">Make a new portfolio</a>
+        <%}%>
+
+        <a href="/user/<%=currentUser._id%>">See user details</a>
+<%}%>
+
+<h1>investments</h1>
+<%investments.forEach(investment => {%>
+        <h2> <%=investment.name%> </h2>
+        <p> Investment Balance: <%=investment.balance%> </p>
+        <p> investment Target: <%=investment.target%> </p>
+
+        <%if(currentUser){%>
+                <form action="/investment/<%=investment.id%>" method="post">
+                        <label for="amt">Buy this Investment</label>
+                        <input type="text" name="amt" placeholder="enter investment value">
+                        <button>buy</button>
+                </form>
+        <%}%>
+<%});%>
+
+
+<h1>portfolios</h1>
+<%portfolios.forEach(portfolio => {%>
+        <h2> <%=portfolio.name%> </h2>
+        <p> Created by: <%=portfolio.creatorName%> </p>
+        <p> Portfolio Target: <%=portfolio.target%> </p>
+        <p> Current balance: <%=portfolio.balance%> </p>
+
+        <%if(currentUser){%>
+                <form action="/portfolio/<%=portfolio.id%>" method="post">
+                        <label for="amt">Buy this Portfolio</label>
+                        <input type="text" name="amt" placeholder="enter investment value">
+                        <button>buy</button>
+                </form>
+        <%}%>
+
+        <h3>investments in portfolio:</h3>
+
+        <%portfolio.investment.forEach( investment => {%>
+                <h4> <%=investment.id.name%> </h4>
+                <p> Investment Ratio: <%=investment.ratio%> </p>
+                <p> Investment Balance: <%=investment.id.balance%> </p>
+                <p> Investment Target: <%=investment.id.target%> </p>
+        <%})%>
+<%});%>

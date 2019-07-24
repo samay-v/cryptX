@@ -1,0 +1,35 @@
+<a href="/">Go home</a>
+
+<%if(currentUser){%>
+    <a href="/logout">Log out</a> 
+<%} else{%>
+    <a href="/login">login</a> 
+    <a href="/register">Signup</a> 
+<%} %>
+
+<a href="/show">See all investments and portfolios</a>
+
+<h1>Welcome <%=user.username%></h1>
+
+<!-- check account type -->
+<%if(user.isTrader){%>
+    <p>Account type: Trader</p>
+<%} else{%>
+    <p>Account type: Normal</p>
+<%}%> 
+
+<p>Current balace: <%=user.balance%> </p>
+
+<!-- list all investments -->
+<h1>Investments</h1>
+<%user.investments.forEach( investment => {%>
+    <h3> <%=investment.id.name%> </h3>
+    <p> Invested Amount: <%=investment.invested%> </p>
+<%})%>
+
+<!-- list all portfolios -->
+<h1>Portfolios invested in</h1>
+<%user.portfolios.forEach( investment => {%>
+    <h3> <%=investment.id.name%> </h3>
+    <p> Invested Amount: <%=investment.invested%> </p>
+<%})%>
